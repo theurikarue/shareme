@@ -2,7 +2,7 @@ import React from 'react';
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import { useNavigate } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
-import {jwtDecode} from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode'; // Updated import
 import shareVideo from '../assets/share.mp4';
 import logo from '../assets/logowhite.png';
 import { client } from '../Client';
@@ -12,7 +12,7 @@ const Login = () => {
 
   const responseGoogle = (response) => {
     try {
-      const decoded = jwtDecode(response.credential);
+      const decoded = jwtDecode(response.credential); // Correct function usage
       localStorage.setItem('user', JSON.stringify(decoded));
 
       const { name, sub, picture } = decoded;
@@ -56,7 +56,7 @@ const Login = () => {
             </div>
             <div className="shadow-2xl">
               <GoogleLogin
-                onSuccess={responseGoogle}
+                onSuccess={(response) => responseGoogle(response)}
                 onError={() => {
                   console.error('Login Failed');
                 }}
